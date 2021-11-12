@@ -12,7 +12,6 @@ class NhanVien{
         NhanVien(string HoTen, string MaNhanVien, int Tuoi);
         ~NhanVien();
         friend istream& operator >>(istream &is, NhanVien &NV);
-        friend ostream& operator >>(ostream &os, NhanVien &NV);
         float getLuong();
         int getTuoi();
         string getHoTen();
@@ -65,14 +64,77 @@ istream& operator >>(istream &is, NhanVien &NV){
     is >> NV.Tuoi;
     return is;
 }
-ostream& operator << (ostream &os, NhanVien &NV){
-    os << "Ho Va Ten La: " << NV.getHoTen()<< endl;
-    os << "Ma Nhan Vien La: " << NV.getMaNhanVien() << endl;
-    os << "So Tuoi La: " << NV.getTuoi() << endl;
+
+class NhanVienBanHang : public NhanVien{
+    private:
+        int DonHangDaBan;
+        float GiaTienMotDon;
+        float Luong;
+    public:
+        NhanVienBanHang();
+        NhanVienBanHang(int DonHangDaBan, float GiaTienMotDon, float Luong);
+        ~NhanVienBanHang();
+        friend istream& operator >>(istream &is, NhanVienBanHang &BH);
+        friend ostream& operator << (ostream &os, NhanVienBanHang &BH);
+        int getDonHangDaBan();
+        float getGiaTienMotDon();
+        float getLuong();
+        void setDonHangDaBan();
+        void setGiaTienMotDon();
+        void setLuong();
+};
+NhanVienBanHang::NhanVienBanHang() : NhanVien(){
+    DonHangDaBan = 0;
+    GiaTienMotDon = 0.0;
+}
+NhanVienBanHang::NhanVienBanHang(int DonHangDaBan, float GiaTienMotDon, float Luong){
+    this->DonHangDaBan = DonHangDaBan;
+    this->GiaTienMotDon = GiaTienMotDon;
+    this->Luong = Luong;
+}
+NhanVienBanHang::~NhanVienBanHang(){
+
+}
+int NhanVienBanHang::getDonHangDaBan(){
+    return DonHangDaBan;
+}
+float NhanVienBanHang::getGiaTienMotDon(){
+    return GiaTienMotDon;
+}
+float NhanVienBanHang::getLuong(){
+    return Luong = Luong;
+}
+void NhanVienBanHang::setDonHangDaBan(){
+    this->DonHangDaBan = DonHangDaBan;
+}
+void NhanVienBanHang::setGiaTienMotDon(){
+    this->GiaTienMotDon = GiaTienMotDon;
+}
+void NhanVienBanHang::setLuong(){
+    this->Luong = Luong;
+}
+istream& operator >>(istream &is, NhanVienBanHang &BH){
+    NhanVien *nv = static_cast<NhanVien *>(&BH);
+    is >> *nv;
+    fflush(stdin);
+    cout << "Nhap So Don Da Ban: ";
+    is >> BH.DonHangDaBan;
+    fflush(stdin);
+    cout << "Nhap Gia Tien Mot Don Hang: ";
+    is >> BH.GiaTienMotDon; 
+    return is;
+
+}
+ostream& operator << (ostream &os, NhanVienBanHang &BH){
+    NhanVien *nv = static_cast<NhanVien *>(&BH);
+    os << *nv;
+    os << "So Don Da Ban La: " << BH.DonHangDaBan << endl;
+    os << "Gia Tien Mot Don Hang La: " << BH.GiaTienMotDon << endl;
+    os << "Luong La: " << BH.Luong << endl;
     return os;
 }
 int main(){
-    NhanVien bh;
+    NhanVienBanHang bh;
     cin >> bh;
     cout << bh;
     return 0;
