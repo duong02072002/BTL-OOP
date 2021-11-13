@@ -102,7 +102,7 @@ float NhanVienBanHang::getGiaTienMotDon(){
     return GiaTienMotDon;
 }
 float NhanVienBanHang::getLuong(){
-    return Luong = Luong;
+    return Luong = GiaTienMotDon *(float)DonHangDaBan;
 }
 void NhanVienBanHang::setDonHangDaBan(){
     this->DonHangDaBan = DonHangDaBan;
@@ -126,16 +126,17 @@ istream& operator >>(istream &is, NhanVienBanHang &BH){
 
 }
 ostream& operator << (ostream &os, NhanVienBanHang &BH){
-    NhanVien *nv = static_cast<NhanVien *>(&BH);
-    os << *nv;
+    os << "Ho Va Ten La: " << BH.getHoTen() << endl;
+    os << "Ma Nhan Vien La: " << BH.getMaNhanVien() << endl;
+    os << "So Tuoi La: " << BH.getTuoi() << endl;
     os << "So Don Da Ban La: " << BH.DonHangDaBan << endl;
     os << "Gia Tien Mot Don Hang La: " << BH.GiaTienMotDon << endl;
-    os << "Luong La: " << BH.Luong << endl;
+    os << "Luong La: " << BH.getLuong() << endl;
     return os;
 }
 int main(){
     NhanVienBanHang bh;
     cin >> bh;
-    cout << bh;
+    cout <<bh;
     return 0;
 }
