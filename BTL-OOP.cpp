@@ -102,7 +102,7 @@ float NhanVienBanHang::getGiaTienMotDon(){
     return GiaTienMotDon;
 }
 float NhanVienBanHang::getLuong(){
-    return Luong = GiaTienMotDon *(float)DonHangDaBan;
+    return Luong = (float)GiaTienMotDon *(float)DonHangDaBan;
 }
 void NhanVienBanHang::setDonHangDaBan(){
     this->DonHangDaBan = DonHangDaBan;
@@ -134,9 +134,73 @@ ostream& operator << (ostream &os, NhanVienBanHang &BH){
     os << "Luong La: " << BH.getLuong() << endl;
     return os;
 }
+
+class Node {
+    public:
+        NhanVienBanHang data;
+        Node *pNext;
+        Node(NhanVienBanHang data){
+            this->data = data;
+            pNext = NULL;
+        }
+};
+class QuanLyNhanVien{
+    private:
+        Node *pHead;
+        Node *pTail;
+        int size;
+    public:
+        QuanLyNhanVien(){
+            pHead = NULL;
+            pTail = NULL;
+            size = 0;
+        };
+        ~QuanLyNhanVien(){};
+        Node *getHead();
+        Node *getTail();  
+        void Nhap(); 
+        void ThemVaoCuoi(NhanVienBanHang bh);    
+        void Xuat();   
+};
+Node* QuanLyNhanVien::getHead(){
+    return pHead;
+}
+Node* QuanLyNhanVien::getTail(){
+    return pTail;
+}
+void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
+    Node *pNode = new Node(bh); 
+    if(size == 0){
+        pHead = pTail = pNode;
+    } else {
+        pTail->pNext = pNode;
+        pTail = pNode;
+    }
+    size++;
+}   
+void QuanLyNhanVien::Nhap(){
+    int n;
+    cout << "Nhap So Nhan Vien Ban Hang: ";
+    cin >> n;
+    fflush(stdin);
+    for(int i=0; i < n; i++){
+        NhanVienBanHang data;
+        cin >> data;
+        ThemVaoCuoi(data);
+    }
+} 
+void QuanLyNhanVien::Xuat(){
+    Node *n = pHead;
+    while(n != NULL){
+        cout << n->data;
+        n = n->pNext;
+    }
+    cout << endl;
+	delete n;
+}
 int main(){
-    NhanVienBanHang bh;
-    cin >> bh;
-    cout <<bh;
+    QuanLyNhanVien nv;
+    nv.Nhap();
+    nv.Xuat();
     return 0;
 }
