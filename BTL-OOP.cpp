@@ -144,7 +144,7 @@ class Node {
             pNext = NULL;
         }
 };
-class QuanLyNhanVien{
+class QuanLyNhanVien {
     private:
         Node *pHead;
         Node *pTail;
@@ -158,9 +158,11 @@ class QuanLyNhanVien{
         ~QuanLyNhanVien(){};
         Node *getHead();
         Node *getTail();  
-        void Nhap(); 
-        void ThemVaoCuoi(NhanVienBanHang bh);    
+        void Nhap();     
         void Xuat();   
+        void ThemVaoCuoi(NhanVienBanHang &bh);
+        void Tong(NhanVienBanHang &bh);
+        void TinhTong();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -168,7 +170,7 @@ Node* QuanLyNhanVien::getHead(){
 Node* QuanLyNhanVien::getTail(){
     return pTail;
 }
-void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
+void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang &bh){
     Node *pNode = new Node(bh); 
     if(size == 0){
         pHead = pTail = pNode;
@@ -189,6 +191,19 @@ void QuanLyNhanVien::Nhap(){
         ThemVaoCuoi(data);
     }
 } 
+void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
+    Node *temp = pHead;
+    float Sum = 0;
+    while(temp != NULL){
+        Sum += temp->data.getLuong();
+        temp = temp->pNext;
+    }
+    cout << "Tong Luong Cua Nhan Vien La: " << Sum << endl;
+}
+void QuanLyNhanVien::TinhTong(){
+    NhanVienBanHang data;
+    Tong(data);
+}
 void QuanLyNhanVien::Xuat(){
     Node *n = pHead;
     while(n != NULL){
@@ -202,5 +217,6 @@ int main(){
     QuanLyNhanVien nv;
     nv.Nhap();
     nv.Xuat();
+    nv.TinhTong();
     return 0;
 }
