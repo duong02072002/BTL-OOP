@@ -163,6 +163,8 @@ class QuanLyNhanVien {
         void ThemVaoCuoi(NhanVienBanHang &bh);
         void Tong(NhanVienBanHang &bh);
         void TinhTong();
+        void Max(NhanVienBanHang &bh);
+        void MaxLuong();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -204,6 +206,23 @@ void QuanLyNhanVien::TinhTong(){
     NhanVienBanHang data;
     Tong(data);
 }
+void QuanLyNhanVien::Max(NhanVienBanHang &bh){
+    Node *Max = new Node (bh);
+    Node *temp = pHead;
+
+    while (temp != NULL){
+        if(temp->data.getLuong() > Max->data.getLuong()){
+           Max->data = temp->data;
+        }
+        temp = temp->pNext;
+    }
+    cout <<"NV Co Luong Lon Nhat La: " << endl << Max->data << endl;
+}
+void QuanLyNhanVien::MaxLuong(){
+    NhanVienBanHang data;
+    Node *pNext;
+    Max(data);
+}
 void QuanLyNhanVien::Xuat(){
     Node *n = pHead;
     while(n != NULL){
@@ -218,5 +237,6 @@ int main(){
     nv.Nhap();
     nv.Xuat();
     nv.TinhTong();
+    nv.MaxLuong();
     return 0;
 }
