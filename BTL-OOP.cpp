@@ -11,7 +11,8 @@ class NhanVien{
         NhanVien();
         NhanVien(string HoTen, string MaNhanVien, int Tuoi);
         ~NhanVien();
-        friend istream& operator >>(istream &is, NhanVien &NV);
+        friend istream& operator >> (istream &is, NhanVien &NV);
+        friend ostream& operator << (ostream &os, NhanVien &NV);
         float getLuong();
         int getTuoi();
         string getHoTen();
@@ -64,6 +65,13 @@ istream& operator >>(istream &is, NhanVien &NV){
     is >> NV.Tuoi;
     return is;
 }
+ostream& operator << (ostream &os, NhanVien &NV){
+    os << "Ho Va Ten La: " << NV.getHoTen() << endl;
+    os << "Ma Nhan Vien La: " << NV.getMaNhanVien() << endl;
+    os << "So Tuoi La: " << NV.getTuoi() << endl;
+    return os;
+}
+
 
 class NhanVienBanHang : public NhanVien{
     private:
@@ -126,9 +134,8 @@ istream& operator >>(istream &is, NhanVienBanHang &BH){
 
 }
 ostream& operator << (ostream &os, NhanVienBanHang &BH){
-    os << "Ho Va Ten La: " << BH.getHoTen() << endl;
-    os << "Ma Nhan Vien La: " << BH.getMaNhanVien() << endl;
-    os << "So Tuoi La: " << BH.getTuoi() << endl;
+    NhanVien *nv = static_cast<NhanVien *>(&BH);
+    os << *nv;
     os << "So Don Da Ban La: " << BH.DonHangDaBan << endl;
     os << "Gia Tien Mot Don Hang La: " << BH.GiaTienMotDon << endl;
     os << "Luong La: " << BH.getLuong() << endl;
