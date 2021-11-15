@@ -167,6 +167,8 @@ class QuanLyNhanVien {
         void MaxLuong();
         void TimKiem(NhanVienBanHang &bh);
         void TimKiemMaNV();
+        void SapXep(NhanVienBanHang &bh);
+        void SapXepNV();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -256,6 +258,24 @@ void QuanLyNhanVien::TimKiemMaNV(){
     NhanVienBanHang data;
     TimKiem(data);
 }
+void QuanLyNhanVien::SapXep(NhanVienBanHang &bh){
+    Node *n = new Node (bh);
+    for(Node *bh1 = pHead; bh1 != NULL; bh1 = bh1->pNext){
+        for(Node *bh2 = pHead; bh2 != NULL; bh2 = bh2->pNext){
+            if(bh1->data.getLuong() > bh2->data.getLuong()){
+                n->data  = bh1->data;
+                bh1->data  = bh2->data;
+                bh2->data  = n->data;
+            }
+        }
+    }
+    n = n->pNext;
+    cout <<"Danh Sach Sau Khi Sap Xep La: " << endl;
+}
+void QuanLyNhanVien::SapXepNV(){
+    NhanVienBanHang data;
+    SapXep(data);
+} 
 int main(){
     QuanLyNhanVien nv;
     nv.Nhap();
@@ -263,5 +283,8 @@ int main(){
     nv.TinhTong();
     nv.MaxLuong();
     nv.TimKiemMaNV();
+    //Ham Sap Xep
+    nv.SapXepNV();
+    nv.Xuat();
     return 0;
 }
