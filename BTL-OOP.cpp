@@ -165,6 +165,8 @@ class QuanLyNhanVien {
         void TinhTong();
         void Max(NhanVienBanHang &bh);
         void MaxLuong();
+        void TimKiem(NhanVienBanHang &bh);
+        void TimKiemMaNV();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -193,6 +195,15 @@ void QuanLyNhanVien::Nhap(){
         ThemVaoCuoi(data);
     }
 } 
+void QuanLyNhanVien::Xuat(){
+    Node *n = pHead;
+    while(n != NULL){
+        cout << n->data;
+        n = n->pNext;
+    }
+    cout << endl;
+	delete n;
+}
 void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
     Node *temp = pHead;
     float Sum = 0;
@@ -223,14 +234,27 @@ void QuanLyNhanVien::MaxLuong(){
     Node *pNext;
     Max(data);
 }
-void QuanLyNhanVien::Xuat(){
-    Node *n = pHead;
-    while(n != NULL){
-        cout << n->data;
-        n = n->pNext;
+void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
+    Node* n = new Node(bh);
+    int Dem = 0;
+    string TimMa;
+    fflush(stdin);
+    cout << "Nhap Ma Can Tim: ";
+    getline(cin,TimMa);
+    fflush(stdin);
+    for(n = pHead; n != NULL; n = n->pNext){
+        if( n->data.getMaNhanVien() == TimMa ){
+            Dem++;
+            cout << "Nhan Vien Co Trong Danh Sach" << endl << n->data << endl;
+        }
     }
-    cout << endl;
-	delete n;
+    if(Dem == 0){
+        cout << "Nhan Vien Khong Ton Tai" << endl;
+    }
+}
+void QuanLyNhanVien::TimKiemMaNV(){
+    NhanVienBanHang data;
+    TimKiem(data);
 }
 int main(){
     QuanLyNhanVien nv;
@@ -238,5 +262,6 @@ int main(){
     nv.Xuat();
     nv.TinhTong();
     nv.MaxLuong();
+    nv.TimKiemMaNV();
     return 0;
 }
