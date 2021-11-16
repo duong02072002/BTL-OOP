@@ -82,7 +82,7 @@ class NhanVienBanHang : public NhanVien{
         NhanVienBanHang();
         NhanVienBanHang(int DonHangDaBan, float GiaTienMotDon, float Luong);
         ~NhanVienBanHang();
-        friend istream& operator >>(istream &is, NhanVienBanHang &BH);
+        friend istream& operator >> (istream &is, NhanVienBanHang &BH);
         friend ostream& operator << (ostream &os, NhanVienBanHang &BH);
         int getDonHangDaBan();
         float getGiaTienMotDon();
@@ -176,6 +176,7 @@ class QuanLyNhanVien {
         void TimKiemMaNV();
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
+        void XoaNV();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -283,6 +284,45 @@ void QuanLyNhanVien::SapXepNV(){
     NhanVienBanHang data;
     SapXep(data);
 } 
+void QuanLyNhanVien::XoaNV(){
+    string n;
+    fflush(stdin);
+    cout << "Nhap Ten Nhan Vien Can Xoa: ";
+    getline(cin,n);
+    fflush(stdin);
+    Node *p = pHead;
+    if(p == NULL){
+        cout << "Khong Co Gia Tri";
+    }
+    else {
+        Node *pPre = NULL;
+        while(p != NULL){
+            if(p->data.getHoTen() == n){
+                break;
+            }
+            pPre = p;
+            p = p->pNext;
+            cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
+        }
+        if(p == NULL){
+            cout << "Nhan Vien Khong Ton Tai";
+        }
+        else {
+            if(p == pHead){
+                pHead = pHead->pNext;
+                p->pNext = NULL;
+                delete p;
+                p = NULL;
+            }
+            else{
+                pPre->pNext = p->pNext;  
+                p->pNext = NULL;
+                delete p;
+                p = NULL;
+            }
+        }
+    }
+}
 int main(){
     QuanLyNhanVien nv;
     nv.Nhap();
@@ -292,6 +332,9 @@ int main(){
     nv.TimKiemMaNV();
     //Ham Sap Xep
     nv.SapXepNV();
+    nv.Xuat();
+    //Ham Xoa
+    nv.XoaNV();
     nv.Xuat();
     return 0;
 }
