@@ -13,7 +13,6 @@ class NhanVien{
         ~NhanVien();
         friend istream& operator >> (istream &is, NhanVien &NV);
         friend ostream& operator << (ostream &os, NhanVien &NV);
-        float getLuong();
         int getTuoi();
         string getHoTen();
         string getMaNhanVien();
@@ -177,6 +176,7 @@ class QuanLyNhanVien {
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
         void XoaNV();
+        void Menu();
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -323,18 +323,60 @@ void QuanLyNhanVien::XoaNV(){
         }
     }
 }
+void QuanLyNhanVien::Menu(){
+    int chon;
+    while(1){
+    	cout << "-----------------MENU------------------" << endl;
+        cout << "1. Nhap Danh Sach Nhan Vien." << endl;
+        cout << "2. Xuat Danh Sach Nhan Vien." << endl;
+        cout << "3. Sap Xep Theo Luong." << endl;
+        cout << "4. Nhan Vien Co Luong Cao Nhat." << endl;
+        cout << "5. Tong Luong Cua Tat Ca Nhan Vien." << endl;
+        cout << "6. Tim Kiem Nhan Vien." << endl;
+        cout << "7. Xoa Mot Nhan Vien." << endl;
+        cout << "8. In Ra FiLe." << endl;
+        cout << "9. Thoat Chuong Trinh (ESC)." << endl;
+        cout << "------------------------------------------" << endl;
+        cout << "=> Lua Chon Cua Ban: ";
+        cin >> chon;
+        switch (chon)
+        {
+        case 1:
+            Nhap();
+            break;
+        case 2:
+        	Xuat();
+    		break;
+    	case 3:
+    		SapXepNV();   
+            Xuat();    
+    		break;
+        case 4:
+            MaxLuong();
+            break;
+        case 5:
+        	TinhTong();
+        	break;
+        case 6:
+            TimKiemMaNV();
+            break;
+        case 7:
+            XoaNV();
+            Xuat();
+            break;
+        // case 8:
+        case 0:
+            cout << "GOOD BYE." << endl;
+            exit(1);
+            break;
+        default:
+            cout << "Lua Chon Cua Ban Khong Hop Le." << endl;
+            break;
+        }
+    }
+}
 int main(){
     QuanLyNhanVien nv;
-    nv.Nhap();
-    nv.Xuat();
-    nv.TinhTong();
-    nv.MaxLuong();
-    nv.TimKiemMaNV();
-    //Ham Sap Xep
-    nv.SapXepNV();
-    nv.Xuat();
-    //Ham Xoa
-    nv.XoaNV();
-    nv.Xuat();
+    nv.Menu();
     return 0;
 }
