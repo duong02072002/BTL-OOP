@@ -16,10 +16,9 @@ class NhanVien{
         int getTuoi();
         string getHoTen();
         string getMaNhanVien();
-        void setHoTen();
-        void setMaNhanVien();
-        void setTuoi();
-        void setLuong();
+        void setHoTen(string);
+        void setMaNhanVien(string);
+        void setTuoi(int);
 };
 NhanVien::NhanVien(){
     HoTen = " ";
@@ -43,13 +42,13 @@ string NhanVien::getHoTen(){
 string NhanVien::getMaNhanVien(){
     return MaNhanVien;
 }
-void NhanVien::setHoTen(){
+void NhanVien::setHoTen(string){
     this->HoTen = HoTen;
 }
-void NhanVien::setMaNhanVien(){
+void NhanVien::setMaNhanVien(string){
     this->MaNhanVien = MaNhanVien;
 }
-void NhanVien::setTuoi(){
+void NhanVien::setTuoi(int){
     this->Tuoi = Tuoi;
 }
 istream& operator >>(istream &is, NhanVien &NV){
@@ -86,9 +85,9 @@ class NhanVienBanHang : public NhanVien{
         int getDonHangDaBan();
         float getGiaTienMotDon();
         float getLuong();
-        void setDonHangDaBan();
-        void setGiaTienMotDon();
-        void setLuong();
+        void setDonHangDaBan(int);
+        void setGiaTienMotDon(float);
+        void setLuong(float);
 };
 NhanVienBanHang::NhanVienBanHang() : NhanVien(){
     DonHangDaBan = 0;
@@ -111,13 +110,13 @@ float NhanVienBanHang::getGiaTienMotDon(){
 float NhanVienBanHang::getLuong(){
     return Luong = (float)GiaTienMotDon *(float)DonHangDaBan;
 }
-void NhanVienBanHang::setDonHangDaBan(){
+void NhanVienBanHang::setDonHangDaBan(int){
     this->DonHangDaBan = DonHangDaBan;
 }
-void NhanVienBanHang::setGiaTienMotDon(){
+void NhanVienBanHang::setGiaTienMotDon(float){
     this->GiaTienMotDon = GiaTienMotDon;
 }
-void NhanVienBanHang::setLuong(){
+void NhanVienBanHang::setLuong(float){
     this->Luong = Luong;
 }
 istream& operator >>(istream &is, NhanVienBanHang &BH){
@@ -298,11 +297,11 @@ void QuanLyNhanVien::XoaNV(){
         Node *pPre = NULL;
         while(p != NULL){
             if(p->data.getHoTen() == n){
+                cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
                 break;
             }
             pPre = p;
             p = p->pNext;
-            cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
         }
         if(p == NULL){
             cout << "Nhan Vien Khong Ton Tai";
