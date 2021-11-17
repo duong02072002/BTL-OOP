@@ -12,13 +12,14 @@ class NhanVien{
         NhanVien(string HoTen, string MaNhanVien, int Tuoi);
         ~NhanVien();
         friend istream& operator >> (istream &is, NhanVien &NV);
-        friend ostream& operator << (ostream &os, NhanVien &NV);
+        float getLuong();
         int getTuoi();
         string getHoTen();
         string getMaNhanVien();
         void setHoTen(string);
         void setMaNhanVien(string);
         void setTuoi(int);
+        void DocFiLe(ifstream &ifs, NhanVien &NV);
 };
 NhanVien::NhanVien(){
     HoTen = " ";
@@ -63,13 +64,16 @@ istream& operator >>(istream &is, NhanVien &NV){
     is >> NV.Tuoi;
     return is;
 }
-ostream& operator << (ostream &os, NhanVien &NV){
-    os << "Ho Va Ten La: " << NV.getHoTen() << endl;
-    os << "Ma Nhan Vien La: " << NV.getMaNhanVien() << endl;
-    os << "So Tuoi La: " << NV.getTuoi() << endl;
-    return os;
+void NhanVien::DocFiLe(ifstream &ifs, NhanVien &NV){
+    fflush(stdin);
+    getline(ifs, NV.HoTen);
+    fflush(stdin);
+    getline(ifs, NV.MaNhanVien);
+    fflush(stdin);
+    ifs >> NV.Tuoi;
+    char ss[5];
+	ifs.getline(ss, 3);
 }
-
 
 class NhanVienBanHang : public NhanVien{
     private:
@@ -88,6 +92,8 @@ class NhanVienBanHang : public NhanVien{
         void setDonHangDaBan(int);
         void setGiaTienMotDon(float);
         void setLuong(float);
+        void DocFiLe(ifstream &ifs, NhanVienBanHang &BH);
+        void GhiFiLe(ofstream &ofs);
 };
 NhanVienBanHang::NhanVienBanHang() : NhanVien(){
     DonHangDaBan = 0;
@@ -108,7 +114,7 @@ float NhanVienBanHang::getGiaTienMotDon(){
     return GiaTienMotDon;
 }
 float NhanVienBanHang::getLuong(){
-    return Luong = (float)GiaTienMotDon *(float)DonHangDaBan;
+    return Luong = GiaTienMotDon *(float)DonHangDaBan;
 }
 void NhanVienBanHang::setDonHangDaBan(int){
     this->DonHangDaBan = DonHangDaBan;
@@ -123,21 +129,35 @@ istream& operator >>(istream &is, NhanVienBanHang &BH){
     NhanVien *nv = static_cast<NhanVien *>(&BH);
     is >> *nv;
     fflush(stdin);
-    cout << "Nhap So Don Da Ban: ";
+    cout << "Nhap So Don Da Ban Trong Ngay La: ";
     is >> BH.DonHangDaBan;
     fflush(stdin);
     cout << "Nhap Gia Tien Mot Don Hang: ";
     is >> BH.GiaTienMotDon; 
+    fflush(stdin);
     return is;
-
 }
 ostream& operator << (ostream &os, NhanVienBanHang &BH){
-    NhanVien *nv = static_cast<NhanVien *>(&BH);
-    os << *nv;
-    os << "So Don Da Ban La: " << BH.DonHangDaBan << endl;
-    os << "Gia Tien Mot Don Hang La: " << BH.GiaTienMotDon << endl;
-    os << "Luong La: " << BH.getLuong() << endl;
+    os << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
+    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    os << left << setw(20) << BH.getHoTen() << setw(15) << BH.getMaNhanVien() << setw(15) << BH.getTuoi() 
+    << setw(15) << BH.DonHangDaBan << setw(15) << BH.GiaTienMotDon << setw(15) << BH.getLuong() << endl;
     return os;
+}
+void NhanVienBanHang::DocFiLe(ifstream &ifs, NhanVienBanHang &BH){
+    NhanVien::DocFiLe(ifs,BH);
+    fflush(stdin);
+    ifs >> BH.DonHangDaBan;
+    fflush(stdin);
+    ifs >> BH.GiaTienMotDon; 
+    char ss[5];
+	ifs.getline(ss, 3);
+}
+void NhanVienBanHang::GhiFiLe(ofstream &ofs){
+    ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
+    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    ofs << left << setw(20) << getHoTen() << setw(15) << getMaNhanVien() << setw(15) << getTuoi() 
+    << setw(15) << getDonHangDaBan() << setw(15) << getGiaTienMotDon() << setw(15) << getLuong() << endl;
 }
 
 class Node {
@@ -162,20 +182,23 @@ class QuanLyNhanVien {
         };
         ~QuanLyNhanVien(){};
         Node *getHead();
-        Node *getTail();  
+        Node *getTail(); 
         void Nhap();     
         void Xuat();   
         void ThemVaoCuoi(NhanVienBanHang &bh);
-        void Tong(NhanVienBanHang &bh);
-        void TinhTong();
-        void Max(NhanVienBanHang &bh);
-        void MaxLuong();
         void TimKiem(NhanVienBanHang &bh);
         void TimKiemMaNV();
+        void Max(NhanVienBanHang &bh);
+        void MaxLuong();
+        void Tong(NhanVienBanHang &bh);
+        void TinhTong();
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
         void XoaNV();
-        void Menu();
+        void DocFiLe();
+        void InFiLe();
+        void Menu();    
+        
 };
 Node* QuanLyNhanVien::getHead(){
     return pHead;
@@ -213,36 +236,6 @@ void QuanLyNhanVien::Xuat(){
     cout << endl;
 	delete n;
 }
-void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
-    Node *temp = pHead;
-    float Sum = 0;
-    while(temp != NULL){
-        Sum += temp->data.getLuong();
-        temp = temp->pNext;
-    }
-    cout << "Tong Luong Cua Nhan Vien La: " << Sum << endl;
-}
-void QuanLyNhanVien::TinhTong(){
-    NhanVienBanHang data;
-    Tong(data);
-}
-void QuanLyNhanVien::Max(NhanVienBanHang &bh){
-    Node *Max = new Node (bh);
-    Node *temp = pHead;
-
-    while (temp != NULL){
-        if(temp->data.getLuong() > Max->data.getLuong()){
-           Max->data = temp->data;
-        }
-        temp = temp->pNext;
-    }
-    cout <<"NV Co Luong Lon Nhat La: " << endl << Max->data << endl;
-}
-void QuanLyNhanVien::MaxLuong(){
-    NhanVienBanHang data;
-    Node *pNext;
-    Max(data);
-}
 void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
     Node* n = new Node(bh);
     int Dem = 0;
@@ -261,9 +254,40 @@ void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
         cout << "Nhan Vien Khong Ton Tai" << endl;
     }
 }
+
 void QuanLyNhanVien::TimKiemMaNV(){
     NhanVienBanHang data;
     TimKiem(data);
+}
+void QuanLyNhanVien::Max(NhanVienBanHang &bh){
+    Node *Max = new Node (bh);
+    Node *temp = pHead;
+
+    while (temp != NULL){
+        if(temp->data.getLuong() > Max->data.getLuong()){
+           Max->data = temp->data;
+        }
+        temp = temp->pNext;
+    }
+    cout <<"NV Co Luong Lon Nhat La: " << endl << Max->data << endl;
+}
+void QuanLyNhanVien::MaxLuong(){
+    NhanVienBanHang data;
+    Node *pNext;
+    Max(data);
+}
+void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
+    Node *temp = pHead;
+    float Sum = 0;
+    while(temp != NULL){
+        Sum += temp->data.getLuong();
+        temp = temp->pNext;
+    }
+    cout << "Tong Luong Cua Nhan Vien La: " << Sum << endl;
+}
+void QuanLyNhanVien::TinhTong(){
+    NhanVienBanHang data;
+    Tong(data);
 }
 void QuanLyNhanVien::SapXep(NhanVienBanHang &bh){
     Node *n = new Node (bh);
@@ -276,7 +300,6 @@ void QuanLyNhanVien::SapXep(NhanVienBanHang &bh){
             }
         }
     }
-    n = n->pNext;
     cout <<"Danh Sach Sau Khi Sap Xep La: " << endl;
 }
 void QuanLyNhanVien::SapXepNV(){
@@ -297,11 +320,11 @@ void QuanLyNhanVien::XoaNV(){
         Node *pPre = NULL;
         while(p != NULL){
             if(p->data.getHoTen() == n){
-                cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
                 break;
             }
             pPre = p;
             p = p->pNext;
+            cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
         }
         if(p == NULL){
             cout << "Nhan Vien Khong Ton Tai";
@@ -321,6 +344,25 @@ void QuanLyNhanVien::XoaNV(){
             }
         }
     }
+}
+void QuanLyNhanVien::InFiLe(){
+    NhanVienBanHang data;
+    ifstream ifs("DOCNHANVIEN.TXT", ios::in);
+    int n;
+    ifs >> n;
+    char ss[5];
+	ifs.getline(ss, 3);
+    cout << "\nThong Tin Nhan Vien:\n";
+    for(int i = 0; i < n; i++){
+        data.DocFiLe(ifs,data);
+        ThemVaoCuoi(data);
+    }
+    ofstream ofs("GHINHANVIEN.TXT",ios::out);
+    for( int i=0; i < n; i++){
+        data.GhiFiLe(ofs);
+    }
+    ofs.close();
+    ifs.close();
 }
 void QuanLyNhanVien::Menu(){
     int chon;
@@ -363,8 +405,10 @@ void QuanLyNhanVien::Menu(){
             XoaNV();
             Xuat();
             break;
-        // case 8:
-        case 0:
+        case 8:
+            InFiLe();
+            break;
+        case 9:
             cout << "GOOD BYE." << endl;
             exit(1);
             break;
