@@ -158,6 +158,7 @@ void NhanVienBanHang::GhiFiLe(ofstream &ofs){
     << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
     ofs << left << setw(20) << getHoTen() << setw(15) << getMaNhanVien() << setw(15) << getTuoi() 
     << setw(15) << getDonHangDaBan() << setw(15) << getGiaTienMotDon() << setw(15) << getLuong() << endl;
+    fflush(stdin);
 }
 
 class Node {
@@ -346,7 +347,7 @@ void QuanLyNhanVien::XoaNV(){
     }
 }
 void QuanLyNhanVien::InFiLe(){
-    NhanVienBanHang data;
+    NhanVienBanHang data[10];
     ifstream ifs("DOCNHANVIEN.TXT", ios::in);
     int n;
     ifs >> n;
@@ -354,12 +355,12 @@ void QuanLyNhanVien::InFiLe(){
 	ifs.getline(ss, 3);
     cout << "\nThong Tin Nhan Vien:\n";
     for(int i = 0; i < n; i++){
-        data.DocFiLe(ifs,data);
-        ThemVaoCuoi(data);
+        data[i].DocFiLe(ifs,data[i]);
+        ThemVaoCuoi(data[i]);
     }
     ofstream ofs("GHINHANVIEN.TXT",ios::out);
-    for( int i=0; i < n; i++){
-        data.GhiFiLe(ofs);
+    for( int i = 0; i < n; i++){
+        data[i].GhiFiLe(ofs);
     }
     ofs.close();
     ifs.close();
