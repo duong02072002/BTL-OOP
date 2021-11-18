@@ -138,8 +138,6 @@ istream& operator >>(istream &is, NhanVienBanHang &BH){
     return is;
 }
 ostream& operator << (ostream &os, NhanVienBanHang &BH){
-    os << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
-    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
     os << left << setw(20) << BH.getHoTen() << setw(15) << BH.getMaNhanVien() << setw(15) << BH.getTuoi() 
     << setw(15) << BH.DonHangDaBan << setw(15) << BH.GiaTienMotDon << setw(15) << BH.getLuong() << endl;
     return os;
@@ -154,8 +152,6 @@ void NhanVienBanHang::DocFiLe(ifstream &ifs, NhanVienBanHang &BH){
 	ifs.getline(ss, 3);
 }
 void NhanVienBanHang::GhiFiLe(ofstream &ofs){
-    ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
-    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
     ofs << left << setw(20) << getHoTen() << setw(15) << getMaNhanVien() << setw(15) << getTuoi() 
     << setw(15) << getDonHangDaBan() << setw(15) << getGiaTienMotDon() << setw(15) << getLuong() << endl;
     fflush(stdin);
@@ -196,7 +192,6 @@ class QuanLyNhanVien {
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
         void XoaNV();
-        void DocFiLe();
         void InFiLe();
         void Menu();    
         
@@ -229,6 +224,8 @@ void QuanLyNhanVien::Nhap(){
     }
 } 
 void QuanLyNhanVien::Xuat(){
+    cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
+    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
     Node *n = pHead;
     while(n != NULL){
         cout << n->data;
@@ -238,14 +235,13 @@ void QuanLyNhanVien::Xuat(){
 	delete n;
 }
 void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
-    Node* n = new Node(bh);
     int Dem = 0;
     string TimMa;
     fflush(stdin);
     cout << "Nhap Ma Can Tim: ";
     getline(cin,TimMa);
     fflush(stdin);
-    for(n = pHead; n != NULL; n = n->pNext){
+    for(Node *n = pHead; n != NULL; n = n->pNext){
         if( n->data.getMaNhanVien() == TimMa ){
             Dem++;
             cout << "Nhan Vien Co Trong Danh Sach" << endl << n->data << endl;
@@ -314,35 +310,31 @@ void QuanLyNhanVien::XoaNV(){
     getline(cin,n);
     fflush(stdin);
     Node *p = pHead;
+    Node *q = NULL;
+    while(p != NULL){
+        if(p->data.getHoTen() == n){
+            cout << "Danh Sach Sau Khi Xoa: " << endl;
+            break;
+        }
+        q = p;
+        p = p->pNext;
+        cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
+    }
     if(p == NULL){
-        cout << "Khong Co Gia Tri";
+        cout << "Nhan Vien Khong Ton Tai";
     }
     else {
-        Node *pPre = NULL;
-        while(p != NULL){
-            if(p->data.getHoTen() == n){
-                break;
-            }
-            pPre = p;
-            p = p->pNext;
-            cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
+        if(p == pHead){
+            pHead = pHead->pNext;
+            p->pNext = NULL;
+            delete p;
+            size--;
         }
-        if(p == NULL){
-            cout << "Nhan Vien Khong Ton Tai";
-        }
-        else {
-            if(p == pHead){
-                pHead = pHead->pNext;
-                p->pNext = NULL;
-                delete p;
-                p = NULL;
-            }
-            else{
-                pPre->pNext = p->pNext;  
-                p->pNext = NULL;
-                delete p;
-                p = NULL;
-            }
+        else{
+            q->pNext = p->pNext;  
+            p->pNext = NULL;
+            delete p;
+            size--;
         }
     }
 }
@@ -353,12 +345,14 @@ void QuanLyNhanVien::InFiLe(){
     ifs >> n;
     char ss[5];
 	ifs.getline(ss, 3);
-    cout << "\nThong Tin Nhan Vien:\n";
     for(int i = 0; i < n; i++){
         data[i].DocFiLe(ifs,data[i]);
         ThemVaoCuoi(data[i]);
     }
     ofstream ofs("GHINHANVIEN.TXT",ios::out);
+    ofs << "Thong Tin Nhan Vien:\n";
+    ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
+    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
     for( int i = 0; i < n; i++){
         data[i].GhiFiLe(ofs);
     }
@@ -377,7 +371,7 @@ void QuanLyNhanVien::Menu(){
         cout << "6. Tim Kiem Nhan Vien." << endl;
         cout << "7. Xoa Mot Nhan Vien." << endl;
         cout << "8. In Ra FiLe." << endl;
-        cout << "9. Thoat Chuong Trinh (ESC)." << endl;
+        cout << "9. Thoat Chuong Trinh." << endl;
         cout << "------------------------------------------" << endl;
         cout << "=> Lua Chon Cua Ban: ";
         cin >> chon;
