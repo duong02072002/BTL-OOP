@@ -377,8 +377,7 @@ void QuanLyNhanVien::Menu(){
         cout << "5. Tong Luong Cua Tat Ca Nhan Vien." << endl;
         cout << "6. Tim Kiem Nhan Vien." << endl;
         cout << "7. Xoa Mot Nhan Vien." << endl;
-        cout << "8. In Ra FiLe." << endl;
-        cout << "9. Thoat Chuong Trinh." << endl;
+        cout << "8. In Ra FiLe Va Thoat Chuong Trinh." << endl;
         cout << "------------------------------------------" << endl;
         cout << "=> Lua Chon Cua Ban: ";
         cin >> chon;
@@ -409,8 +408,6 @@ void QuanLyNhanVien::Menu(){
             break;
         case 8:
             InFiLe();
-            break;
-        case 9:
             cout << "GOOD BYE." << endl;
             exit(1);
             break;
