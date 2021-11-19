@@ -19,7 +19,7 @@ class NhanVien{
         void setHoTen(string);
         void setMaNhanVien(string);
         void setTuoi(int);
-        void DocFiLe(ifstream &ifs, NhanVien &NV);
+        virtual void DocFiLe(ifstream &ifs, NhanVien &NV);
 };
 NhanVien::NhanVien(){
     HoTen = " ";
@@ -235,31 +235,30 @@ void QuanLyNhanVien::Xuat(){
 	delete n;
 }
 void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
-    int Dem = 0;
-    string TimMa;
+    string Ma;
+    Node *temp = pHead;
     fflush(stdin);
     cout << "Nhap Ma Can Tim: ";
-    getline(cin,TimMa);
+    getline(cin,Ma);
     fflush(stdin);
-    for(Node *n = pHead; n != NULL; n = n->pNext){
-        if( n->data.getMaNhanVien() == TimMa ){
-            Dem++;
-            cout << "Nhan Vien Co Trong Danh Sach" << endl << n->data << endl;
+    while(temp != NULL){
+        if(temp->data.getMaNhanVien() == Ma){
+            cout << "Nhan Vien Co Trong Danh Sach: " << endl << temp->data << endl;
+            break;
+        }
+        temp=temp->pNext; 
+        if(temp == NULL){
+            cout << "Nhan Vien Khong Ton Tai" << endl;
         }
     }
-    if(Dem == 0){
-        cout << "Nhan Vien Khong Ton Tai" << endl;
-    }
 }
-
-void QuanLyNhanVien::TimKiemMaNV(){
-    NhanVienBanHang data;
-    TimKiem(data);
+void QuanLyNhanVien::TimKiemMaNV(){ 
+        NhanVienBanHang data;
+        TimKiem(data);
 }
 void QuanLyNhanVien::Max(NhanVienBanHang &bh){
     Node *Max = new Node (bh);
     Node *temp = pHead;
-
     while (temp != NULL){
         if(temp->data.getLuong() > Max->data.getLuong()){
            Max->data = temp->data;
@@ -309,33 +308,41 @@ void QuanLyNhanVien::XoaNV(){
     cout << "Nhap Ten Nhan Vien Can Xoa: ";
     getline(cin,n);
     fflush(stdin);
-    Node *p = pHead;
-    Node *q = NULL;
-    while(p != NULL){
-        if(p->data.getHoTen() == n){
+    Node *pDel = pHead;     
+    Node *pPre = NULL;  
+    while(pDel != NULL){
+        if(pDel->data.getHoTen() == n){
             cout << "Danh Sach Sau Khi Xoa: " << endl;
             break;
         }
-        q = p;
-        p = p->pNext;
-        cout << "Danh Sach Nhan Vien Sau Khi Xoa:" << endl;
+        pPre = pDel;
+        pDel = pDel -> pNext;
     }
-    if(p == NULL){
+    if(pDel == NULL){
         cout << "Nhan Vien Khong Ton Tai";
     }
     else {
-        if(p == pHead){
+        // Xoa Dau
+        if(pDel == pHead){
             pHead = pHead->pNext;
-            p->pNext = NULL;
-            delete p;
-            size--;
+            pDel->pNext = NULL;
+            delete pDel;
+            pDel = NULL;
         }
+        // Xoa cuoi
+        else if(pDel -> pNext == NULL){
+            pTail = pPre;
+            pPre -> pNext = NULL;
+            delete pDel;
+            pDel = NULL;
+        }
+        // Xoa giua
         else{
-            q->pNext = p->pNext;  
-            p->pNext = NULL;
-            delete p;
-            size--;
-        }
+            pPre -> pNext = pDel -> pNext;
+            pDel -> pNext = NULL;
+            delete pDel;
+            pDel = NULL; 
+      }
     }
 }
 void QuanLyNhanVien::InFiLe(){
