@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 
+#include <Windows.h>
+
 using namespace std;
 
 class NhanVien{
@@ -192,7 +194,8 @@ class QuanLyNhanVien {
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
         void XoaNV();
-        void InFiLe();
+        void DocFiLe();
+        void GhiFiLe();
         void Menu();    
         
 };
@@ -235,14 +238,14 @@ void QuanLyNhanVien::Xuat(){
 	delete n;
 }
 void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
-    string Ma;
+    string MaNV;
     Node *temp = pHead;
     fflush(stdin);
     cout << "Nhap Ma Can Tim: ";
-    getline(cin,Ma);
+    getline(cin,MaNV);
     fflush(stdin);
     while(temp != NULL){
-        if(temp->data.getMaNhanVien() == Ma){
+        if(temp->data.getMaNhanVien() == MaNV){
             cout << "Nhan Vien Co Trong Danh Sach: " << endl << temp->data << endl;
             break;
         }
@@ -345,8 +348,22 @@ void QuanLyNhanVien::XoaNV(){
       }
     }
 }
-void QuanLyNhanVien::InFiLe(){
+void QuanLyNhanVien::DocFiLe(){
     NhanVienBanHang data[10];
+    ifstream ifs("DOCNHANVIEN.TXT", ios::in);
+    int n;
+    ifs >> n;
+    char ss[5];
+	ifs.getline(ss, 3);
+    for(int i = 0; i < n; i++){
+        data[i].DocFiLe(ifs,data[i]);
+        ThemVaoCuoi(data[i]);
+    }
+    Xuat();
+    ifs.close();
+}
+void QuanLyNhanVien::GhiFiLe(){
+	NhanVienBanHang data[10];
     ifstream ifs("DOCNHANVIEN.TXT", ios::in);
     int n;
     ifs >> n;
@@ -377,7 +394,9 @@ void QuanLyNhanVien::Menu(){
         cout << "5. Tong Luong Cua Tat Ca Nhan Vien." << endl;
         cout << "6. Tim Kiem Nhan Vien." << endl;
         cout << "7. Xoa Mot Nhan Vien." << endl;
-        cout << "8. In Ra FiLe Va Thoat Chuong Trinh." << endl;
+        cout << "8. Doc Du Lieu Tu FiLe." << endl;
+        cout << "9. Ghi Du Lieu Ra FiLe." << endl;
+        cout << "10.Thoat Chuong Trinh." << endl;
         cout << "------------------------------------------" << endl;
         cout << "=> Lua Chon Cua Ban: ";
         cin >> chon;
@@ -407,7 +426,12 @@ void QuanLyNhanVien::Menu(){
             Xuat();
             break;
         case 8:
-            InFiLe();
+            DocFiLe();
+            break;
+        case 9:
+            GhiFiLe();
+            break;
+        case 10:
             cout << "GOOD BYE." << endl;
             exit(1);
             break;
@@ -418,7 +442,9 @@ void QuanLyNhanVien::Menu(){
     }
 }
 int main(){
+    system("color E4");
     QuanLyNhanVien nv;
     nv.Menu();
+    system ("pause");
     return 0;
 }
