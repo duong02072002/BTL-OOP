@@ -215,6 +215,7 @@ void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang &bh){
 }   
 void QuanLyNhanVien::Nhap(){
     int n;
+    cout << "************** NHAP NHAN VIEN ****************" << endl << endl;;
     cout << "Nhap So Nhan Vien Ban Hang: ";
     cin >> n;
     fflush(stdin);
@@ -223,6 +224,7 @@ void QuanLyNhanVien::Nhap(){
         cin >> data;
         ThemVaoCuoi(data);
     }
+    cout << endl;
 } 
 void QuanLyNhanVien::Xuat(){
     cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
