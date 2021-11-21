@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
 
-#include <Windows.h>
-
 using namespace std;
 
 class NhanVien{
@@ -386,19 +384,19 @@ void QuanLyNhanVien::GhiFiLe(){
 void QuanLyNhanVien::Menu(){
     int chon;
     while(1){
-    	cout << "-----------------MENU------------------" << endl;
-        cout << "1. Nhap Danh Sach Nhan Vien." << endl;
-        cout << "2. Xuat Danh Sach Nhan Vien." << endl;
-        cout << "3. Sap Xep Theo Luong." << endl;
-        cout << "4. Nhan Vien Co Luong Cao Nhat." << endl;
-        cout << "5. Tong Luong Cua Tat Ca Nhan Vien." << endl;
-        cout << "6. Tim Kiem Nhan Vien." << endl;
-        cout << "7. Xoa Mot Nhan Vien." << endl;
-        cout << "8. Doc Du Lieu Tu FiLe." << endl;
-        cout << "9. Ghi Du Lieu Ra FiLe." << endl;
-        cout << "10.Thoat Chuong Trinh." << endl;
-        cout << "------------------------------------------" << endl;
-        cout << "=> Lua Chon Cua Ban: ";
+    	cout << "******************** MENU ********************" << endl;
+        cout << setw(5) << left << "|1." << "Nhap Danh Sach Nhan Vien.               |" << endl;
+        cout << setw(5) << left << "|2." << "Xuat Danh Sach Nhan Vien.               |" << endl;
+        cout << setw(5) << left << "|3." << "Sap Xep Theo Luong.                     |" << endl;
+        cout << setw(5) << left << "|4." << "Nhan Vien Co Luong Cao Nhat.            |" << endl;
+        cout << setw(5) << left << "|5." << "Tong Luong Cua Tat Ca Nhan Vien.        |" << endl;
+        cout << setw(5) << left << "|6." << "Tim Kiem Nhan Vien.                     |" << endl;
+        cout << setw(5) << left << "|7." << "Xoa Mot Nhan Vien.                      |" << endl;
+        cout << setw(5) << left << "|8." << "Doc Du Lieu Tu FiLe.                    |" << endl;
+        cout << setw(5) << left << "|9." << "Ghi Du Lieu Ra FiLe.                    |" << endl;
+        cout << setw(5) << left << "|10."<< "Thoat Chuong Trinh.                     |" << endl;
+        cout << "**********************************************" << endl;
+        cout << setw(5) << left << "=>" << "Lua Chon Cua Ban: ";
         cin >> chon;
         switch (chon)
         {
@@ -442,9 +440,7 @@ void QuanLyNhanVien::Menu(){
     }
 }
 int main(){
-    system("color E4");
     QuanLyNhanVien nv;
     nv.Menu();
-    system ("pause");
     return 0;
 }
