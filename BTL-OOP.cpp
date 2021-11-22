@@ -227,14 +227,15 @@ void QuanLyNhanVien::Nhap(){
     cout << endl;
 } 
 void QuanLyNhanVien::Xuat(){
-    cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
-    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    cout << "******************************** DANH SACH NHAN VIEN *********************************" << endl;
+    cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl;
     Node *n = pHead;
     while(n != NULL){
         cout << n->data;
         n = n->pNext;
     }
-    cout << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl << endl;
 	delete n;
 }
 void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
