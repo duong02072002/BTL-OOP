@@ -247,12 +247,18 @@ void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
     fflush(stdin);
     while(temp != NULL){
         if(temp->data.getMaNhanVien() == MaNV){
-            cout << "Nhan Vien Co Trong Danh Sach: " << endl << temp->data << endl;
+            cout << "Nhan Vien Co Trong Danh Sach: " << endl;
+            cout << "******************************** DANH SACH NHAN VIEN *********************************" << endl;            
+            cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+            cout << "--------------------------------------------------------------------------------------" << endl;
+            cout << temp->data;
+            cout << "--------------------------------------------------------------------------------------" << endl << endl;
             break;
         }
         temp=temp->pNext; 
         if(temp == NULL){
-            cout << "Nhan Vien Khong Ton Tai" << endl;
+            cout << "**********************************************" << endl << endl;
+            cout << "Nhan Vien Khong Ton Tai" << endl << endl;
         }
     }
 }
