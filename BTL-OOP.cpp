@@ -289,7 +289,9 @@ void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
         Sum += temp->data.getLuong();
         temp = temp->pNext;
     }
+    cout << "************ DANH SACH NHAN VIEN *************" << endl  << endl;
     cout << "Tong Luong Cua Nhan Vien La: " << Sum << endl;
+    cout << endl;
 }
 void QuanLyNhanVien::TinhTong(){
     NhanVienBanHang data;
