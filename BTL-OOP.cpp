@@ -269,13 +269,19 @@ void QuanLyNhanVien::TimKiemMaNV(){
 void QuanLyNhanVien::Max(NhanVienBanHang &bh){
     Node *Max = new Node (bh);
     Node *temp = pHead;
+
     while (temp != NULL){
         if(temp->data.getLuong() > Max->data.getLuong()){
            Max->data = temp->data;
         }
         temp = temp->pNext;
     }
-    cout <<"NV Co Luong Lon Nhat La: " << endl << Max->data << endl;
+    cout <<"Nhan Vien Co Luong Cao Nhat:" << endl;
+    cout << "******************************** DANH SACH NHAN VIEN *********************************" << endl << endl;
+    cout << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl;
+    cout << Max->data;
+    cout << "--------------------------------------------------------------------------------------" << endl << endl;
 }
 void QuanLyNhanVien::MaxLuong(){
     NhanVienBanHang data;
