@@ -323,21 +323,26 @@ void QuanLyNhanVien::SapXepNV(){
 void QuanLyNhanVien::XoaNV(){
     string n;
     fflush(stdin);
+    cout << "**********************************************" << endl;
     cout << "Nhap Ten Nhan Vien Can Xoa: ";
     getline(cin,n);
     fflush(stdin);
-    Node *pDel = pHead;     
-    Node *pPre = NULL;  
+    cout << endl;
+    Node *pDel = pHead;
+    Node *pPre = NULL;
     while(pDel != NULL){
         if(pDel->data.getHoTen() == n){
-            cout << "Danh Sach Sau Khi Xoa: " << endl;
+            cout << "**********************************************" << endl << endl;
+            cout << "Nhan Vien Da Duoc Xoa" << endl << endl; 
+            cout << "Danh Sach Sau Khi Xoa La:" << endl;
             break;
         }
         pPre = pDel;
-        pDel = pDel -> pNext;
+        pDel = pDel->pNext;
     }
     if(pDel == NULL){
-        cout << "Nhan Vien Khong Ton Tai";
+        cout << "**********************************************" << endl << endl;
+        cout << "Nhan Vien Khong Ton Tai" << endl << endl;
     }
     else {
         // Xoa Dau
