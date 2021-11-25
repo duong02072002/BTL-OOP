@@ -383,7 +383,7 @@ void QuanLyNhanVien::DocFiLe(){
     ifs.close();
 }
 void QuanLyNhanVien::GhiFiLe(){
-	NhanVienBanHang data[10];
+    NhanVienBanHang data[10];
     ifstream ifs("DOCNHANVIEN.TXT", ios::in);
     int n;
     ifs >> n;
@@ -395,11 +395,13 @@ void QuanLyNhanVien::GhiFiLe(){
     }
     ofstream ofs("GHINHANVIEN.TXT",ios::out);
     ofs << "Thong Tin Nhan Vien:\n";
-    ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" 
-    << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    ofs << "******************************** DANH SACH NHAN VIEN *********************************" << endl << endl;
+    ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    ofs << "--------------------------------------------------------------------------------------" << endl;
     for( int i = 0; i < n; i++){
         data[i].GhiFiLe(ofs);
     }
+    ofs << "--------------------------------------------------------------------------------------" << endl;
     ofs.close();
     ifs.close();
 }
