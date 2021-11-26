@@ -365,7 +365,7 @@ void QuanLyNhanVien::XoaNV(){
             pDel -> pNext = NULL;
             delete pDel;
             pDel = NULL; 
-      }
+        }
     }
 }
 void QuanLyNhanVien::DocFiLe(){
