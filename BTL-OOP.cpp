@@ -379,7 +379,6 @@ void QuanLyNhanVien::DocFiLe(){
         data[i].DocFiLe(ifs,data[i]);
         ThemVaoCuoi(data[i]);
     }
-    Xuat();
     ifs.close();
 }
 void QuanLyNhanVien::GhiFiLe(){
@@ -454,7 +453,7 @@ void QuanLyNhanVien::Menu(){
             GhiFiLe();
             break;
         case 10:
-            cout << "GOOD BYE." << endl;
+            cout <<"\t\tGOOD BYE." << endl;
             exit(1);
             break;
         default:
