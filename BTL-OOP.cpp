@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 
+#include <Windows.h>
+
 using namespace std;
 
 class NhanVien{
@@ -12,10 +14,9 @@ class NhanVien{
         NhanVien(string HoTen, string MaNhanVien, int Tuoi);
         ~NhanVien();
         friend istream& operator >> (istream &is, NhanVien &NV);
-        float getLuong();
-        int getTuoi();
         string getHoTen();
         string getMaNhanVien();
+        int getTuoi();
         void setHoTen(string);
         void setMaNhanVien(string);
         void setTuoi(int);
@@ -34,14 +35,14 @@ NhanVien::NhanVien(string HoTen, string MaNhanVien, int Tuoi){
 NhanVien::~NhanVien(){
 
 }
-int NhanVien::getTuoi(){
-    return Tuoi;
-}
 string NhanVien::getHoTen(){
     return HoTen;
 }
 string NhanVien::getMaNhanVien(){
     return MaNhanVien;
+}
+int NhanVien::getTuoi(){
+    return Tuoi;
 }
 void NhanVien::setHoTen(string){
     this->HoTen = HoTen;
@@ -180,9 +181,9 @@ class QuanLyNhanVien {
         ~QuanLyNhanVien(){};
         Node *getHead();
         Node *getTail(); 
+        void ThemVaoCuoi(NhanVienBanHang &bh);
         void Nhap();     
         void Xuat();   
-        void ThemVaoCuoi(NhanVienBanHang &bh);
         void TimKiem(NhanVienBanHang &bh);
         void TimKiemMaNV();
         void Max(NhanVienBanHang &bh);
@@ -285,7 +286,6 @@ void QuanLyNhanVien::Max(NhanVienBanHang &bh){
 }
 void QuanLyNhanVien::MaxLuong(){
     NhanVienBanHang data;
-    Node *pNext;
     Max(data);
 }
 void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
@@ -392,7 +392,7 @@ void QuanLyNhanVien::GhiFiLe(){
         data[i].DocFiLe(ifs,data[i]);
         ThemVaoCuoi(data[i]);
     }
-    ofstream ofs("GHINHANVIEN.TXT",ios::out);
+    ofstream ofs("GHINHANVIEN.TXT",ios::out | ios::app);
     ofs << "Thong Tin Nhan Vien:\n";
     ofs << "******************************** DANH SACH NHAN VIEN *********************************" << endl << endl;
     ofs << left << setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
@@ -453,17 +453,19 @@ void QuanLyNhanVien::Menu(){
             GhiFiLe();
             break;
         case 10:
-            cout <<"\t\tGOOD BYE." << endl;
+            cout << endl <<"\t\tGOOD BYE!!!" << endl;
             exit(1);
             break;
         default:
-            cout << "Lua Chon Cua Ban Khong Hop Le." << endl;
+            cout << "Lua Chon Cua Ban Khong Hop Le!!!" << endl;
             break;
         }
     }
 }
 int main(){
+    system("color E4");	
     QuanLyNhanVien nv;
     nv.Menu();
+    system ("pause");
     return 0;
 }
