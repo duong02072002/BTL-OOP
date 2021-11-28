@@ -184,8 +184,7 @@ class QuanLyNhanVien {
         void ThemVaoCuoi(NhanVienBanHang &bh);
         void Nhap();     
         void Xuat();   
-        void TimKiem(NhanVienBanHang &bh);
-        void TimKiemMaNV();
+        void TimKiemMa();
         void Max(NhanVienBanHang &bh);
         void MaxLuong();
         void Tong(NhanVienBanHang &bh);
@@ -239,7 +238,7 @@ void QuanLyNhanVien::Xuat(){
     cout << "--------------------------------------------------------------------------------------" << endl << endl;
 	delete n;
 }
-void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
+void QuanLyNhanVien::TimKiemMa(){
     string MaNV;
     Node *temp = pHead;
     fflush(stdin);
@@ -262,10 +261,6 @@ void QuanLyNhanVien::TimKiem(NhanVienBanHang &bh){
             cout << "Nhan Vien Khong Ton Tai" << endl << endl;
         }
     }
-}
-void QuanLyNhanVien::TimKiemMaNV(){ 
-        NhanVienBanHang data;
-        TimKiem(data);
 }
 void QuanLyNhanVien::Max(NhanVienBanHang &bh){
     Node *Max = new Node (bh);
@@ -440,7 +435,7 @@ void QuanLyNhanVien::Menu(){
         	TinhTong();
         	break;
         case 6:
-            TimKiemMaNV();
+            TimKiemMa();
             break;
         case 7:
             XoaNV();
