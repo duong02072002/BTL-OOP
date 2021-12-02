@@ -187,7 +187,6 @@ class QuanLyNhanVien {
         void TimKiemMa();
         void Max(NhanVienBanHang &bh);
         void MaxLuong();
-        void Tong(NhanVienBanHang &bh);
         void TinhTong();
         void SapXep(NhanVienBanHang &bh);
         void SapXepNV();
@@ -283,7 +282,7 @@ void QuanLyNhanVien::MaxLuong(){
     NhanVienBanHang data;
     Max(data);
 }
-void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
+void QuanLyNhanVien::TinhTong(){
     Node *temp = pHead;
     float Sum = 0;
     while(temp != NULL){
@@ -293,10 +292,6 @@ void QuanLyNhanVien::Tong(NhanVienBanHang &bh){
     cout << "************ DANH SACH NHAN VIEN *************" << endl  << endl;
     cout << "Tong Luong Cua Nhan Vien La: " << Sum << endl;
     cout << endl;
-}
-void QuanLyNhanVien::TinhTong(){
-    NhanVienBanHang data;
-    Tong(data);
 }
 void QuanLyNhanVien::SapXep(NhanVienBanHang &bh){
     Node *n = new Node (bh);
