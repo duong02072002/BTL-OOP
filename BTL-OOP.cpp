@@ -27,32 +27,41 @@ NhanVien::NhanVien(){
     MaNhanVien = " ";
     Tuoi = 0;
 }
+
 NhanVien::NhanVien(string HoTen, string MaNhanVien, int Tuoi){
     this->HoTen = HoTen;
     this->MaNhanVien = MaNhanVien;
     this->Tuoi = Tuoi;
 }
+
 NhanVien::~NhanVien(){
 
 }
+
 string NhanVien::getHoTen(){
     return HoTen;
 }
+
 string NhanVien::getMaNhanVien(){
     return MaNhanVien;
 }
+
 int NhanVien::getTuoi(){
     return Tuoi;
 }
+
 void NhanVien::setHoTen(string){
     this->HoTen = HoTen;
 }
+
 void NhanVien::setMaNhanVien(string){
     this->MaNhanVien = MaNhanVien;
 }
+
 void NhanVien::setTuoi(int){
     this->Tuoi = Tuoi;
 }
+
 istream& operator >>(istream &is, NhanVien &NV){
     fflush(stdin);
     cout << "Nhap Ho Va Ten: ";
@@ -65,6 +74,7 @@ istream& operator >>(istream &is, NhanVien &NV){
     is >> NV.Tuoi;
     return is;
 }
+
 void NhanVien::DocFiLe(ifstream &ifs, NhanVien &NV){
     fflush(stdin);
     getline(ifs, NV.HoTen);
@@ -75,6 +85,10 @@ void NhanVien::DocFiLe(ifstream &ifs, NhanVien &NV){
     char ss[5];
 	ifs.getline(ss, 3);
 }
+
+
+
+
 
 class NhanVienBanHang : public NhanVien{
     private:
@@ -96,36 +110,46 @@ class NhanVienBanHang : public NhanVien{
         void DocFiLe(ifstream &ifs, NhanVienBanHang &BH);
         void GhiFiLe(ofstream &ofs);
 };
+
 NhanVienBanHang::NhanVienBanHang() : NhanVien(){
     DonHangDaBan = 0;
     GiaTienMotDon = 0.0;
 }
+
 NhanVienBanHang::NhanVienBanHang(int DonHangDaBan, float GiaTienMotDon, float Luong){
     this->DonHangDaBan = DonHangDaBan;
     this->GiaTienMotDon = GiaTienMotDon;
     this->Luong = Luong;
 }
+
 NhanVienBanHang::~NhanVienBanHang(){
 
 }
+
 int NhanVienBanHang::getDonHangDaBan(){
     return DonHangDaBan;
 }
+
 float NhanVienBanHang::getGiaTienMotDon(){
     return GiaTienMotDon;
 }
+
 float NhanVienBanHang::getLuong(){
     return Luong = GiaTienMotDon *(float)DonHangDaBan;
 }
+
 void NhanVienBanHang::setDonHangDaBan(int){
     this->DonHangDaBan = DonHangDaBan;
 }
+
 void NhanVienBanHang::setGiaTienMotDon(float){
     this->GiaTienMotDon = GiaTienMotDon;
 }
+
 void NhanVienBanHang::setLuong(float){
     this->Luong = Luong;
 }
+
 istream& operator >>(istream &is, NhanVienBanHang &BH){
     NhanVien *nv = static_cast<NhanVien *>(&BH);
     is >> *nv;
@@ -138,11 +162,13 @@ istream& operator >>(istream &is, NhanVienBanHang &BH){
     fflush(stdin);
     return is;
 }
+
 ostream& operator << (ostream &os, NhanVienBanHang &BH){
     os << left << setw(20) << BH.getHoTen() << setw(15) << BH.getMaNhanVien() << setw(15) << BH.getTuoi() 
     << setw(15) << BH.DonHangDaBan << setw(15) << BH.GiaTienMotDon << setw(15) << BH.getLuong() << endl;
     return os;
 }
+
 void NhanVienBanHang::DocFiLe(ifstream &ifs, NhanVienBanHang &BH){
     NhanVien::DocFiLe(ifs,BH);
     fflush(stdin);
@@ -152,11 +178,16 @@ void NhanVienBanHang::DocFiLe(ifstream &ifs, NhanVienBanHang &BH){
     char ss[5];
 	ifs.getline(ss, 3);
 }
+
 void NhanVienBanHang::GhiFiLe(ofstream &ofs){
     ofs << left << setw(20) << getHoTen() << setw(15) << getMaNhanVien() << setw(15) << getTuoi() 
     << setw(15) << getDonHangDaBan() << setw(15) << getGiaTienMotDon() << setw(15) << getLuong() << endl;
     fflush(stdin);
 }
+
+
+
+
 
 class Node {
     public:
@@ -167,6 +198,7 @@ class Node {
             pNext = NULL;
         }
 };
+
 class QuanLyNhanVien {
     private:
         Node *pHead;
@@ -196,12 +228,15 @@ class QuanLyNhanVien {
         void Menu();    
         
 };
+
 Node* QuanLyNhanVien::getHead(){
     return pHead;
 }
+
 Node* QuanLyNhanVien::getTail(){
     return pTail;
 }
+
 void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
     Node *pNode = new Node(bh); 
     if(size == 0){
@@ -212,10 +247,11 @@ void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
     }
     size++;
 }
+
 void QuanLyNhanVien::Nhap(){
     int n;
-    cout << "\t\t\t\t\t\t************** NHAP NHAN VIEN ****************" << endl << endl;;
-    cout << "\t\t\t\t\t\tNhap So Nhan Vien Ban Hang: ";
+    cout << "\t\t\t\t\t\t\t\t\t\t\t************** NHAP NHAN VIEN ****************" << endl << endl;;
+    cout << "\t\t\t\t\t\t\t\t\t\t\tNhap So Nhan Vien Ban Hang: ";
     cin >> n;
     fflush(stdin);
     for(int i=0; i < n; i++){
@@ -225,44 +261,47 @@ void QuanLyNhanVien::Nhap(){
     }
     cout << endl;
 } 
+
 void QuanLyNhanVien::Xuat(){
-    cout << "\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;
-    cout << left <<"\t\t\t\t\t\t"<< setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
-    cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
+    cout << "\t\t\t\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;
+    cout << left <<"\t\t\t\t\t\t\t\t\t"<< setw(20) << "Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
     Node *n = pHead;
     while(n != NULL){
-        cout << "\t\t\t\t\t\t";
+        cout << "\t\t\t\t\t\t\t\t\t";
         cout << n->data;
         n = n->pNext;
     }
-    cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
+    cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
 	delete n;
 }
+
 void QuanLyNhanVien::TimKiemMa(){
-    string MaNV;
+    string MaNV,MaNV1;
     Node *temp = pHead;
+    int dem=0;
     fflush(stdin);
-    cout << "\t\t\t\t\t\tNhap Ma Can Tim: ";
+    cout << "\t\t\t\t\t\t\t\t\t\t\tNhap Ma Can Tim: ";
     getline(cin,MaNV);
     fflush(stdin);
-    while(temp != NULL){
-        if(temp->data.getMaNhanVien() == MaNV){
-            cout << "\t\t\t\t\t\tNhan Vien Co Trong Danh Sach: " << endl;
-            cout << "\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;            
-            cout << left <<"\t\t\t\t\t\t"<<setw(20) <<"Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
-            cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t\t\t";
+    for(temp=pHead ; temp!=NULL ; temp=temp->pNext){
+        MaNV1=temp->data.getMaNhanVien();
+        if(MaNV == MaNV1){
+            cout << "\t\t\t\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;            
+            cout << left <<"\t\t\t\t\t\t\t\t\t"<<setw(20) <<"Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+            cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
+            cout << "\t\t\t\t\t\t\t\t\t";
             cout << temp->data;
-            cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
-            break;
-        }
-        temp=temp->pNext; 
-    }
-    if(temp == NULL){
-            cout << "\t\t\t\t\t\t**********************************************" << endl << endl;
-            cout << "\t\t\t\t\t\tNhan Vien Khong Ton Tai" << endl << endl;
+            cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
+            dem++;
+         }
+     }
+    if(dem==0){
+        cout << "\t\t\t\t\t\t\t\t\t\t\t**********************************************" << endl << endl;
+        cout << "\t\t\t\t\t\t\t\t\t\t\tNhan Vien Khong Ton Tai" << endl << endl;
     }
 } 
+
 void QuanLyNhanVien::Max(NhanVienBanHang bh){
     Node *Max = new Node (bh);
     Node *temp = pHead;
@@ -273,14 +312,15 @@ void QuanLyNhanVien::Max(NhanVienBanHang bh){
         }
         temp = temp->pNext;
     }
-    cout <<"\t\t\t\t\t\tNhan Vien Co Luong Cao Nhat:" << endl;
-    cout << "\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl << endl;
-    cout << left <<"\t\t\t\t\t\t"<<setw(20) <<"Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
-    cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
-    cout <<"\t\t\t\t\t\t";
+    cout <<"\t\t\t\t\t\t\t\t\t\t\tNhan Vien Co Luong Cao Nhat:" << endl;
+    cout << "\t\t\t\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;
+    cout << left <<"\t\t\t\t\t\t\t\t\t"<<setw(20) <<"Ten" << setw(15) << "Ma" << setw(15) << "Tuoi" << setw(15) << "So Don" << setw(15) << "Gia Don" << setw(15) << "Luong" << endl;
+    cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl;
+    cout <<"\t\t\t\t\t\t\t\t\t";
     cout << Max->data;
-    cout << "\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
+    cout << "\t\t\t\t\t\t\t\t\t--------------------------------------------------------------------------------------" << endl << endl;
 }
+
 void QuanLyNhanVien::MaxLuong(){
     NhanVienBanHang data;
     Max(data);
@@ -292,10 +332,11 @@ void QuanLyNhanVien::TinhTong(){
         Sum += temp->data.getLuong();
         temp = temp->pNext;
     }
-    cout << "\t\t\t\t\t\t************ DANH SACH NHAN VIEN *************" << endl  << endl;
-    cout << "\t\t\t\t\t\tTong Luong Cua Nhan Vien La: " << Sum << endl;
+    cout << "\t\t\t\t\t\t\t\t\t\t\t************ DANH SACH NHAN VIEN *************" << endl  << endl;
+    cout << "\t\t\t\t\t\t\t\t\t\t\tTong Luong Cua Nhan Vien La: " << Sum << endl;
     cout << endl;
 }
+
 void QuanLyNhanVien::SapXep(NhanVienBanHang bh){
     Node *n = new Node (bh);
     for(Node *bh1 = pHead; bh1 != NULL; bh1 = bh1->pNext){
@@ -307,17 +348,19 @@ void QuanLyNhanVien::SapXep(NhanVienBanHang bh){
             }
         }
     }
-    cout <<"\t\t\t\t\t\tDanh Sach Sau Khi Sap Xep La: " << endl;
+    cout <<"\t\t\t\t\t\t\t\t\t\t\tDanh Sach Sau Khi Sap Xep La: " << endl;
 }
+
 void QuanLyNhanVien::SapXepNV(){
     NhanVienBanHang data;
     SapXep(data);
 } 
+
 void QuanLyNhanVien::XoaNV(){
     string n;
     fflush(stdin);
-    cout << "\t\t\t\t\t\t**********************************************" << endl;
-    cout << "\t\t\t\t\t\tNhap Ten Nhan Vien Can Xoa: ";
+    cout << "\t\t\t\t\t\t\t\t\t\t\t**********************************************" << endl;
+    cout << "\t\t\t\t\t\t\t\t\t\t\tNhap Ten Nhan Vien Can Xoa: ";
     getline(cin,n);
     fflush(stdin);
     cout << endl;
@@ -325,17 +368,17 @@ void QuanLyNhanVien::XoaNV(){
     Node *pPre = NULL;
     while(pDel != NULL){
         if(pDel->data.getHoTen() == n){
-            cout << "\t\t\t\t\t\t**********************************************" << endl << endl;
-            cout << "\t\t\t\t\t\tNhan Vien Da Duoc Xoa" << endl << endl; 
-            cout << "\t\t\t\t\t\tDanh Sach Sau Khi Xoa La:" << endl;
+            cout << "\t\t\t\t\t\t\t\t\t\t\t**********************************************" << endl << endl;
+            cout << "\t\t\t\t\t\t\t\t\t\t\tNhan Vien Da Duoc Xoa" << endl << endl; 
+            cout << "\t\t\t\t\t\t\t\t\t\t\tDanh Sach Sau Khi Xoa La:" << endl;
             break;
         }
         pPre = pDel;
         pDel = pDel->pNext;
     }
     if(pDel == NULL){
-        cout << "\t\t\t\t\t\t**********************************************" << endl << endl;
-        cout << "\t\t\t\t\t\tNhan Vien Khong Ton Tai" << endl << endl;
+        cout << "\t\t\t\t\t\t\t\t\t\t\t**********************************************" << endl << endl;
+        cout << "\t\t\t\t\t\t\t\t\t\t\tNhan Vien Khong Ton Tai" << endl << endl;
     }
     else {
         if(pDel == pHead){
@@ -358,6 +401,7 @@ void QuanLyNhanVien::XoaNV(){
         }
     }
 }
+
 void QuanLyNhanVien::DocFiLe(){
     NhanVienBanHang data[10];
     ifstream ifs("DOCNHANVIEN.TXT", ios::in);
@@ -371,6 +415,7 @@ void QuanLyNhanVien::DocFiLe(){
     }
     ifs.close();
 }
+
 void QuanLyNhanVien::GhiFiLe(){
     NhanVienBanHang data[10];
     ifstream ifs("DOCNHANVIEN.TXT", ios::in);
@@ -394,23 +439,25 @@ void QuanLyNhanVien::GhiFiLe(){
     ofs.close();
     ifs.close();
 }
+
 void QuanLyNhanVien::Menu(){
     int chon;
     while(1){
-    	cout << "\t\t\t\t\t\t******************** MENU ******************" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|1. " << "Nhap Danh Sach Nhan Vien.               |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|2. " << "Xuat Danh Sach Nhan Vien.               |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|3. " << "Sap Xep Theo Luong.                     |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|4. " << "Nhan Vien Co Luong Cao Nhat.            |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|5. " << "Tong Luong Cua Tat Ca Nhan Vien.        |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|6. " << "Tim Kiem Nhan Vien.                     |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|7. " << "Xoa Mot Nhan Vien.                      |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|8. " << "Doc Du Lieu Tu FiLe.                    |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|9. " << "Ghi Du Lieu Ra FiLe.                    |" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t|10." << "Thoat Chuong Trinh.                     |" << endl;
-        cout << "\t\t\t\t\t\t********************************************" << endl;
-        cout << setw(5) << left << "\t\t\t\t\t\t=>" << "Lua Chon Cua Ban: ";
+    	cout << "\t\t\t\t\t\t\t\t\t\t\t******************** MENU **************************\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|1. " << "Nhap Danh Sach Nhan Vien.                      |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|2. " << "Xuat Danh Sach Nhan Vien.                      |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|3. " << "Sap Xep Theo Luong.                            |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|4. " << "Nhan Vien Co Luong Cao Nhat.                   |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|5. " << "Tong Luong Cua Tat Ca Nhan Vien.               |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|6. " << "Tim Kiem Nhan Vien.                            |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|7. " << "Xoa Mot Nhan Vien.                             |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|8. " << "Doc Du Lieu Tu FiLe.                           |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|9. " << "Ghi Du Lieu Ra FiLe.                           |\n" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t|10." << "Thoat Chuong Trinh.                            |\n" << endl;
+        cout << "\t\t\t\t\t\t\t\t\t\t\t****************************************************" << endl;
+        cout << setw(5) << left << "\t\t\t\t\t\t\t\t\t\t\t=>" << "Lua Chon Cua Ban: ";
         cin >> chon;
+        cout << endl;
         switch (chon)
         {
         case 1:
@@ -438,22 +485,23 @@ void QuanLyNhanVien::Menu(){
             break;
         case 8:
             DocFiLe();
-            cout << endl <<"\t\t\t\t\t\tDa Lay Thong Tin Tu FiLe~~~" << endl << endl;
+            cout << endl <<"\t\t\t\t\t\t\t\t\t\t\tDa Lay Thong Tin Tu FiLe~~~" << endl << endl;
             break;
         case 9:
             GhiFiLe();
-            cout << endl << "\t\t\t\t\t\tDa In Vao FiLe GHINHANVIEN.TXT~~~" << endl << endl;
+            cout << "\t\t\t\t\t\t\t\t\t\t\tDa In Vao FiLe GHINHANVIEN.TXT~~~" << endl << endl;
             break;
         case 10:
-            cout << endl <<"\t\t\t\t\t\t\t\tGOOD BYE!!!" << endl << endl;
+            cout <<"\t\t\t\t\t\t\t\t\t\t\t\t\tGOOD BYE!!!" << endl << endl;
             exit(1);
             break;
         default:
-            cout << "\t\t\t\t\t\tLua Chon Cua Ban Khong Hop Le!!!" << endl << endl;
+            cout << "\t\t\t\t\t\t\t\t\t\t\tLua Chon Cua Ban Khong Hop Le!!!" << endl << endl;
             break;
         }
     }
 }
+
 int main(){
     system("color E4");	
     QuanLyNhanVien nv;
