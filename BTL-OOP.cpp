@@ -181,14 +181,14 @@ class QuanLyNhanVien {
         ~QuanLyNhanVien(){};
         Node *getHead();
         Node *getTail(); 
-        void ThemVaoCuoi(NhanVienBanHang &bh);
+        void ThemVaoCuoi(NhanVienBanHang bh);
         void Nhap();     
         void Xuat();   
         void TimKiemMa();
         void Max(NhanVienBanHang bh);
         void MaxLuong();
         void TinhTong();
-        void SapXep(NhanVienBanHang &bh);
+        void SapXep(NhanVienBanHang bh);
         void SapXepNV();
         void XoaNV();
         void DocFiLe();
@@ -202,7 +202,7 @@ Node* QuanLyNhanVien::getHead(){
 Node* QuanLyNhanVien::getTail(){
     return pTail;
 }
-void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang &bh){
+void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
     Node *pNode = new Node(bh); 
     if(size == 0){
         pHead = pTail = pNode;
@@ -211,7 +211,7 @@ void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang &bh){
         pTail = pNode;
     }
     size++;
-}   
+}
 void QuanLyNhanVien::Nhap(){
     int n;
     cout << "\t\t\t\t\t\t************** NHAP NHAN VIEN ****************" << endl << endl;;
@@ -296,7 +296,7 @@ void QuanLyNhanVien::TinhTong(){
     cout << "\t\t\t\t\t\tTong Luong Cua Nhan Vien La: " << Sum << endl;
     cout << endl;
 }
-void QuanLyNhanVien::SapXep(NhanVienBanHang &bh){
+void QuanLyNhanVien::SapXep(NhanVienBanHang bh){
     Node *n = new Node (bh);
     for(Node *bh1 = pHead; bh1 != NULL; bh1 = bh1->pNext){
         for(Node *bh2 = bh1->pNext; bh2 != NULL; bh2 = bh2->pNext){
@@ -438,16 +438,18 @@ void QuanLyNhanVien::Menu(){
             break;
         case 8:
             DocFiLe();
+            cout << endl <<"\t\t\t\t\t\tDa Lay Thong Tin Tu FiLe~~~" << endl << endl;
             break;
         case 9:
             GhiFiLe();
+            cout << endl << "\t\t\t\t\t\tDa In Vao FiLe GHINHANVIEN.TXT~~~" << endl << endl;
             break;
         case 10:
-            cout << endl <<"\t\t\t\t\t\t\t\tGOOD BYE!!!" << endl;
+            cout << endl <<"\t\t\t\t\t\t\t\tGOOD BYE!!!" << endl << endl;
             exit(1);
             break;
         default:
-            cout << "\t\t\t\t\t\tLua Chon Cua Ban Khong Hop Le!!!" << endl;
+            cout << "\t\t\t\t\t\tLua Chon Cua Ban Khong Hop Le!!!" << endl << endl;
             break;
         }
     }
