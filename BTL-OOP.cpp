@@ -214,6 +214,7 @@ class QuanLyNhanVien {
         Node *getHead();
         Node *getTail(); 
         void ThemVaoCuoi(NhanVienBanHang bh);
+        bool Check(NhanVienBanHang bh);
         void Nhap();     
         void Xuat();   
         void TimKiemMa();
@@ -248,19 +249,40 @@ void QuanLyNhanVien::ThemVaoCuoi(NhanVienBanHang bh){
     size++;
 }
 
+bool QuanLyNhanVien::Check(NhanVienBanHang bh){
+    Node *q = new Node (bh);
+    for(Node *p = pHead; p!=NULL; p = p->pNext){
+        if(p->data.getMaNhanVien() == q->data.getMaNhanVien())
+        return true;
+    }
+    return false;
+}
 void QuanLyNhanVien::Nhap(){
+    NhanVienBanHang data;
+    Node *p = pHead;
+    Node *q = NULL;
     int n;
     cout << "\t\t\t\t\t\t\t\t\t\t\t************** NHAP NHAN VIEN ****************" << endl << endl;;
     cout << "\t\t\t\t\t\t\t\t\t\t\tNhap So Nhan Vien Ban Hang: ";
     cin >> n;
     fflush(stdin);
     for(int i=0; i < n; i++){
-        NhanVienBanHang data;
+        do{
         cin >> data;
+            if(Check(data)){
+                cout << endl << "\t\t\t\t\t\t\t\t\t\t\tMa Nhan Vien Da Ton Tai !!!" << endl;
+                cout << "\t\t\t\t\t\t\t\t\t\t\tVui Long Nhap Lai Nhan Vien !!!" << endl << endl;
+                cin >> data;
+            }
+            if(data.getTuoi() <= 18){
+                cout << endl << "\t\t\t\t\t\t\t\t\t\t\tTuoi Nhan Vien Khong Hop Le !!!" << endl << endl;
+                cin >> data;
+            }
+        }while(Check(data));
         ThemVaoCuoi(data);
     }
     cout << endl;
-} 
+}
 
 void QuanLyNhanVien::Xuat(){
     cout << "\t\t\t\t\t\t\t\t\t******************************** DANH SACH NHAN VIEN *********************************" << endl;
